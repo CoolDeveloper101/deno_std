@@ -526,6 +526,12 @@ class Module {
       return module?.exports;
     }
 
+      if (filename.endsWith(".node")) {
+      // @ts-ignore `Deno.core` is not a public API
+      return Deno.core.opSync("op_napi_open", filename);
+    }
+
+
     const cachedModule = Module._cache[filename];
     if (cachedModule !== undefined) {
       updateChildren(parent, cachedModule, true);
