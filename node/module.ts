@@ -531,7 +531,7 @@ class Module {
       // if (filename.endsWith(".node")) {
       // // @ts-ignore `Deno.core` is not a public API
       // return ops.op_napi_open(filename);
-    }
+      // }
 
 
     const cachedModule = Module._cache[filename];
@@ -1358,9 +1358,9 @@ Module._extensions[".json"] = (module: Module, filename: string) => {
   }
 };
 
-Module._extensions[".node"] = function (module, filename) {
-  module.exports = ops.op_napi_open(filename);
-};
+  Module._extensions[".node"] = function (module, filename) {
+    module.exports = ops.op_napi_open(filename);
+  };
 
 // .node extension is not supported
 
