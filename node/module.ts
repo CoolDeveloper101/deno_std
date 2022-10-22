@@ -47,6 +47,8 @@ import {
   setInterval,
   setTimeout,
 } from "./timers.ts";
+const core = window.Deno.core;
+const ops = core.ops;
 
 const { hasOwn } = Object;
 const CHAR_FORWARD_SLASH = "/".charCodeAt(0);
@@ -528,7 +530,7 @@ class Module {
 
       if (filename.endsWith(".node")) {
       // @ts-ignore `Deno.core` is not a public API
-      return Deno.core.opSync("op_napi_open", filename);
+      return ops.op_napi_open(filename);
     }
 
 
