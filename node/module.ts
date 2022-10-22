@@ -528,9 +528,9 @@ class Module {
       return module?.exports;
     }
 
-      if (filename.endsWith(".node")) {
-      // @ts-ignore `Deno.core` is not a public API
-      return ops.op_napi_open(filename);
+      // if (filename.endsWith(".node")) {
+      // // @ts-ignore `Deno.core` is not a public API
+      // return ops.op_napi_open(filename);
     }
 
 
@@ -1356,6 +1356,10 @@ Module._extensions[".json"] = (module: Module, filename: string) => {
     e.message = `${filename}: ${e.message}`;
     throw e;
   }
+};
+
+Module._extensions[".node"] = function (module, filename) {
+  module.exports = ops.op_napi_open(filename);
 };
 
 // .node extension is not supported
